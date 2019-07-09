@@ -1,0 +1,40 @@
+{
+    "project_info": {
+      "project_number": "214888087626",
+      "firebase_url": "https://bitevents-5f852.firebaseio.com",
+      "project_id": "bitevents-5f852",
+      "storage_bucket": "bitevents-5f852.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:214888087626:android:3d7a4a8f6a2959a4",
+          "android_client_info": {
+            "package_name": "com.bitevents"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "214888087626-idggfkg99so33m9k20vsjnb4c6p2s35k.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDGxjT9_D_CnH86BJy0cT4DjPhXM8eBVd8"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "214888087626-idggfkg99so33m9k20vsjnb4c6p2s35k.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
