@@ -1,36 +1,23 @@
 import React from "react";
 import { View, TouchableOpacity, FlatList } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import { Image } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import EventCard from './app/components/EventCard';
-import EventList from './app/components/EventList';
-
-const desc = "Et aperiam magnam impedit aperiam id sed. Ipsam culpa sint quo modi quisquam. Architecto quibusdam inventore cum fugiat. Ratione fuga sed \
-sunt ab. Repellat accusantium pariatur voluptas.Et aperiam magnam impedit aperiam id sed. Ipsam culpa sint quo modi quisquam. Architecto quibusdam inventore cum fugiat. Ratione fuga sed \
-sunt ab. Repellat accusantium pariatur voluptas.Et aperiam magnam impedit aperiam id sed. Ipsam culpa sint quo modi quisquam. Architecto quibusdam inventore cum fugiat. Ratione fuga sed \
-sunt ab. Repellat accusantium pariatur voluptas.Et aperiam magnam impedit aperiam id sed. Ipsam culpa sint quo modi quisquam. Architecto quibusdam inventore cum fugiat. Ratione fuga sed \
-sunt ab. Repellat accusantium pariatur voluptas.Et aperiam magnam impedit aperiam id sed. Ipsam culpa sint quo modi quisquam. Architecto quibusdam inventore cum fugiat. Ratione fuga sed \
-sunt ab. Repellat accusantium pariatur voluptas.Et aperiam magnam impedit aperiam id sed. Ipsam culpa sint quo modi quisquam. Architecto quibusdam inventore cum fugiat. Ratione fuga sed \
-sunt ab. Repellat accusantium pariatur voluptas.Et aperiam magnam impedit aperiam id sed. Ipsam culpa sint quo modi quisquam. Architecto quibusdam inventore cum fugiat. Ratione fuga sed \ ";
+import EventList from './app/components/EventList';;
 
 class HomeScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    //this.state.firebaseApp = ;
+    this.getEventList = this.getEventList.bind(this);
+  }
+
+  getEventList() {
+       
+  }
+
   render() {
-    /*
-    let cardArray = [];
-    for(let i = 0; i < 7; ++i) {
-      cardArray.push({
-        key: 10
-      });
-    }
-    return <FlatList data={cardArray} renderItem = {
-      ({item}) => {
-        return (<EventCard clubIconUrl="https://media.istockphoto.com/photos/man-speaking-at-a-business-conference-picture-id499517325"
-        clubName="ACM" eventName="CQM-1000" posterUrl="https://media.istockphoto.com/photos/man-speaking-at-a-business-conference-picture-id499517325" 
-        desc={desc} startDate="Today" endDate="Tommorow"/>);
-      }
-    }/>
-    */
    let dataArray = [];
    for(let i = 0; i < 10; ++i) {
      dataArray.push({
@@ -38,7 +25,9 @@ class HomeScreen extends React.Component {
        src: "https://media.istockphoto.com/photos/man-speaking-at-a-business-conference-picture-id499517325"
      })
    }
-   return <EventList listItems={dataArray} />
+   console.log('render');
+   this.getEventList();
+   return <EventList listItems={dataArray} onPressCallback={() => {this.props.navigation.navigate("Description");}}/>
   }
 }
 class LoginPage extends React.Component {
@@ -55,6 +44,29 @@ class LoginPage extends React.Component {
   }
 }
 
+class DescriptionPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      clubIconUrl: "https://media.istockphoto.com/photos/man-speaking-at-a-business-conference-picture-id499517325",
+      clubName: "ACM",
+      eventName: "CQM",
+      posterUrl: "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.SMbWRAxiRdIKGO5lK9dnUwHaJ4%26pid%3DApi&f=1",
+      googleFormUrl: "https://www.testlink.com",
+      desc: "qefopqjwefkojqwiefj0qejqrjqjgqiwjgioj",
+      startDate: "Today",
+      endDate: "Tommorow" 
+    }
+  }
+  
+  render() {
+    return (
+    <EventCard clubIconUrl={this.state.clubIconUrl} clubName={this.state.clubName} eventName={this.state.eventName} posterUrl={this.state.posterUrl}
+    googleFormUrl={this.state.googleFormUrl} desc={this.state.desc} startDate={this.state.startDate} endDate={this.state.endDate} />);
+  }
+}
+
 const AppNavigator = createStackNavigator(
   {
     Home: {
@@ -62,6 +74,9 @@ const AppNavigator = createStackNavigator(
     },
     Login: {
       screen: LoginPage
+    },
+    Description: {
+      screen: DescriptionPage
     }
   },
   {

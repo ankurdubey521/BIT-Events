@@ -1,7 +1,6 @@
 import React from "react";
-import { Image, StyleSheet } from 'react-native';
+import { Image,StyleSheet,Dimensions, Linking} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default class EventCard extends React.Component {
 
@@ -12,11 +11,11 @@ export default class EventCard extends React.Component {
         clubName: this.props.clubName,
         eventName: this.props.eventName,
         posterUrl: this.props.posterUrl,
+        googleFormUrl: this.props.googleFormUrl,
         desc: this.props.desc,
         startDate: this.props.startDate,
         endDate: this.props.endDate
     };
-    console.log(this.state);
     this.register = this.register.bind(this);
   }
 
@@ -27,41 +26,38 @@ export default class EventCard extends React.Component {
   render() {
     return(
       <Container>
-      <Header />
       <Content>
         <Card style={style}>
           <CardItem>
             <Left>
               <Thumbnail source={{ uri: this.state.clubIconUrl}} />
               <Body>
-                <Text>{this.state.clubName}</Text>
-                <Text note>{this.state.startDate} - {this.state.endDate}</Text>
+                <Text style={style.clubName}>{this.state.clubName}</Text>
+                <Text style={style.duration} note>{this.state.startDate} - {this.state.endDate}</Text>
               </Body>
             </Left>
           </CardItem>
           <CardItem>
             <Left>
-              <Body>
-                <Text>{this.state.eventName}</Text>
+              <Body style={style.eventName}>
+                <Text style={style.eventName}>{this.state.eventName}</Text>
               </Body>
             </Left>
           </CardItem>
           <CardItem>
             <Body>
-              <Image source={{ uri: this.state.posterUrl}} style={{height: 200, width: 200, flex: 1}}/>
-              {/*
-              <Text>
+              <Image source={{ uri: this.state.posterUrl}} style={{height:400,width:'100%',paddingBottom:2}} resizeMode="contain"/>
+              
+              <Text style={style.description}>
+                {"\n"}
                 {this.state.desc}
               </Text>
-              */ }
             </Body>
           </CardItem>
-          <CardItem>
-            <Left>
-              <TouchableOpacity onPress={this.register}>
-                <Text>Register</Text>
-              </TouchableOpacity>
-            </Left>
+          <CardItem style={style.register}>
+          <Button full success style={style.full} onPress={()=> Linking.openURL(this.state.googleFormUrl)}>
+            <Text style={style.register} >Register</Text>
+          </Button>
           </CardItem>
         </Card>
       </Content>
@@ -71,9 +67,40 @@ export default class EventCard extends React.Component {
 }
 
 const style = StyleSheet.create({
-  flex: 1,
-  paddingLeft: 0,
-  paddingRight: 0,
-  paddingTop: 0,
-  paddingBottom: 0
+  clubName:{
+    fontSize:18,
+    fontFamily:'Trebuchet MS',
+    fontWeight:'bold'
+  },
+  duration:
+  {
+    fontSize:16,
+    fontFamily:'Trebuchet MS',
+    fontWeight:'bold'
+  },
+  eventName:{
+    fontSize:25,
+    fontFamily:'Trebuchet MS',
+    fontWeight:'bold',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  description:
+  {
+    fontSize:23,
+    fontFamily:'Trebuchet MS'
+  },
+  poster:{
+    justifyContent:'space-around'
+  },
+  register:{
+    fontSize:21,
+    fontFamily:'calibri',
+    justifyContent: 'space-around',
+    alignItems:'center'
+  },
+  full:
+  {
+    width:'100%'
+  }
 });

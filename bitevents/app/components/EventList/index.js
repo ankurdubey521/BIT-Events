@@ -12,7 +12,7 @@ export default class EventList extends Component {
     }
 
     onEventPress() {
-        console.log("Arora");
+        this.props.onPressCallback();
     }
 
     generateListItemArray(list) {
