@@ -20,7 +20,7 @@ export default class EventCard extends React.Component {
   }
 
   register() {
-
+    Linking.openURL(this.state.googleFormUrl);
   }
 
   render() {
@@ -46,8 +46,7 @@ export default class EventCard extends React.Component {
           </CardItem>
           <CardItem>
             <Body>
-              <Image source={{ uri: this.state.posterUrl}} style={{height:400,width:'100%',paddingBottom:2}} resizeMode="contain"/>
-              
+              <Image source={{ uri: this.state.posterUrl}} style={{height:400,width:'100%'}} resizeMode="contain"/>
               <Text style={style.description}>
                 {"\n"}
                 {this.state.desc}
@@ -55,8 +54,8 @@ export default class EventCard extends React.Component {
             </Body>
           </CardItem>
           <CardItem style={style.register}>
-          <Button full success style={style.full} onPress={()=> Linking.openURL(this.state.googleFormUrl)}>
-            <Text style={style.register} >Register</Text>
+          <Button full success style={style.full} onPress={this.register}>
+            <Text style={style.register}>Register</Text>
           </Button>
           </CardItem>
         </Card>
@@ -87,7 +86,7 @@ const style = StyleSheet.create({
   },
   description:
   {
-    fontSize:23,
+    fontSize:18,
     fontFamily:'Trebuchet MS'
   },
   poster:{

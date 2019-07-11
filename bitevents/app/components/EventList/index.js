@@ -1,46 +1,70 @@
-import React, { Component, Alert } from 'react';
-import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Thumbnail } from 'native-base';
+import React, { Component } from 'react';
+import { ActivityIndicator, StyleSheet } from 'react-native';
+import { Container, Content, Card, CardItem, Text, Icon, Right, Thumbnail} from 'native-base';
+import firebase from '../../firebaseRealtimeDatabaseConfig';
+
 export default class EventList extends Component {
-
     constructor(props) {
-        super(props);
-        this.state = {
-            listItems: this.props.listItems
-        };
-        this.generateListItemArray = this.generateListItemArray.bind(this);
-        this.onEventPress = this.onEventPress.bind(this);
-    }
+		super(props);
+		this.generateListItemArray = this.generateListItemArray.bind(this);
+		this.onEventPress = this.onEventPress.bind(this);
+		this.setEventList = this.setEventList.bind(this);
 
-    onEventPress() {
-        this.props.onPressCallback();
-    }
+		this.state = {
+			listItems: this.props.listItems,
+			listCardJsx: <ActivityIndicator size="large" color="#0000ff" />
+		};
+	}
 
-    generateListItemArray(list) {
-        let itemArray = [];
-        for (let i = 0; i < list.length; ++i) {
-            itemArray.push(
-            <CardItem button onPress={this.onEventPress}>
-                 <Thumbnail source={{ uri: list[i].src}}/>
-                <Text style={{flex: 10}}>{list[i].eventName}</Text>
-                <Right>
-                    <Icon name="arrow-forward" style={{align:"right"}}/>
-                </Right>
-            </CardItem>
-            );
-        }
-        return itemArray;
-    }
+	onEventPress() {
+		this.props.onPressCallback();
+	}
 
-    render() {
-        return (
-            <Container>
-                <Header />
-                <Content>
-                    <Card>
-                        {this.generateListItemArray(this.state.listItems)}
-                    </Card>
-                </Content>
-            </Container>
-        );
-    }
+	setEventList() {
+		let list = [];
+		let eventsCollection = firebase.database().ref('/Events');
+		return eventsCollection.once('value', (snapshot) => {
+			const state = snapshot.val();
+			list.push({
+				eventName: state.event_name,
+				src: 'http://ipsn.acm.org/2011/index_files/acm.jpg'
+			});
+			this.setState({
+				listCardJsx: this.generateListItemArray(list)
+			});
+		});
+	}
+
+	generateListItemArray(list) {
+		let itemArray = [];
+		for (let i = 0; i < list.length; ++i) {
+			itemArray.push(
+				<CardItem button onPress={this.onEventPress} key={i}>
+					<Thumbnail source={{ uri: list[i].src }} />
+					<Text style={style.clubName}>{list[i].eventName}</Text>
+				</CardItem>
+			);
+		}
+		return itemArray;
+	}
+
+	render() {
+		this.setEventList();
+		return (
+			<Container>
+				<Content>
+					<Card>{this.state.listCardJsx}</Card>
+				</Content>
+			</Container>
+		);
+	}
 }
+
+const style = StyleSheet.create({
+    clubName: {
+        fontSize:18,
+        fontFamily:'Trebuchet MS',
+        fontWeight:'bold',
+        paddingLeft: 10
+    },
+});
