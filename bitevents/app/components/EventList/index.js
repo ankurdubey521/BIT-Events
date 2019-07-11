@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet, StatusBar } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Icon, Right, Thumbnail} from 'native-base';
 import firebase from '../../firebaseRealtimeDatabaseConfig';
 
@@ -60,6 +60,7 @@ export default class EventList extends Component {
 	}
 
 	render() {
+        StatusBar.setBackgroundColor('black', true);
         if(this.state.isLoading) {
             this.setEventList();
         }
@@ -84,7 +85,7 @@ const style = StyleSheet.create({
         fontSize:14,
         fontFamily:'Trebuchet MS',
         fontWeight:'bold',
-        paddingLeft: 5
+        paddingLeft: 0
     },
     reloadIcon:{
         fontSize:20,

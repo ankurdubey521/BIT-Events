@@ -98,8 +98,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems:'center'
   },
-  full:
-  {
+  full:{
     width:'100%'
   }
 });
