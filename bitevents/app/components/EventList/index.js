@@ -11,6 +11,7 @@ export default class EventList extends Component {
 		this.setEventList = this.setEventList.bind(this);
 
 		this.state = {
+            isLoading: true,
 			listItems: this.props.listItems,
 			listCardJsx: <ActivityIndicator size="large" color="#0000ff" />
 		};
@@ -21,6 +22,10 @@ export default class EventList extends Component {
 	}
 
 	setEventList() {
+        this.setState({
+            listCardJsx: <ActivityIndicator size="large" color="#0000ff" />,
+            isLoading: false
+        });
 		let list = [];
 		let eventsCollection = firebase.database().ref('/Events');
 		return eventsCollection.once('value', (snapshot) => {
@@ -39,17 +44,25 @@ export default class EventList extends Component {
 		let itemArray = [];
 		for (let i = 0; i < list.length; ++i) {
 			itemArray.push(
-				<CardItem button onPress={this.onEventPress} key={i}>
+				<CardItem button onPress={this.onEventPress} key={i+1}>
 					<Thumbnail source={{ uri: list[i].src }} />
 					<Text style={style.clubName}>{list[i].eventName}</Text>
 				</CardItem>
-			);
-		}
+            );
+        }
+        itemArray.push(
+            <CardItem button onPress={this.setEventList} key={10}>
+                <Icon type = "MaterialCommunityIcons" name = "reload" style={style.reloadIcon}/>
+                <Text style={style.reloadText}>Reload</Text>
+            </CardItem>
+        );
 		return itemArray;
 	}
 
 	render() {
-		this.setEventList();
+        if(this.state.isLoading) {
+            this.setEventList();
+        }
 		return (
 			<Container>
 				<Content>
@@ -67,4 +80,14 @@ const style = StyleSheet.create({
         fontWeight:'bold',
         paddingLeft: 10
     },
+    reloadText: {
+        fontSize:14,
+        fontFamily:'Trebuchet MS',
+        fontWeight:'bold',
+        paddingLeft: 5
+    },
+    reloadIcon:{
+        fontSize:20,
+        fontWeight:'bold'
+    }
 });
