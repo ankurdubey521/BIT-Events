@@ -1,4 +1,4 @@
-package com.bitevents;
+package com.destroyingrecursively.bitevents;
 
 import com.facebook.react.ReactActivity;
 

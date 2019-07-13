@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1012861969204",
+    "firebase_url": "https://bitevents-4d1c5.firebaseio.com",
+    "project_id": "bitevents-4d1c5",
+    "storage_bucket": "bitevents-4d1c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012861969204:android:53419de559db76c4",
+        "android_client_info": {
+          "package_name": "com.destroyingrecursively.bitevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012861969204-e04kaibn8uav78d5hco4s73fq5402oh9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.destroyingrecursively.bitevents",
+            "certificate_hash": "fb859389e19fd41494a5f052e3fa0c38a52dbd6c"
+          }
+        },
+        {
+          "client_id": "1012861969204-ei4o4vhvnm8e545ol3crek9d8872i2f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_H5xDHIcEiYmezkWJKfsI12Tw8IpkdSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012861969204-b9ti6t1tatt47hbqtv5gfh7362evov1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
