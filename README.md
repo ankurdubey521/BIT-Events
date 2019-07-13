@@ -4,10 +4,10 @@ BIT Events is an app which tracks all the events happening in BIT Mesra campus. 
 
 
 Login Page:
-[Login Page](screenshots/login.png)
+![Login Page](screenshots/login.png)
 
 Home Page:
-[Home Page](screenshots/home.png)
+![Home Page](screenshots/home.png)
 
 Event Description:
-[Description Page](screenshots/desrciption.png)
+![Description Page](screenshots/desrciption.png)
